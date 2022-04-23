@@ -1,0 +1,51 @@
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+
+.card {
+    box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1);
+    animation: pabajo .5s;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.card:hover {
+
+    animation: elevation .5s;
+    box-shadow: 0px 5px 20px 3px rgba(64, 50, 255, 0.15);
+
+}
+
+
+@keyframes elevation {
+
+    0%   { box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1); }
+    100% { box-shadow: 0px 5px 20px 3px rgba(64, 50, 255, 0.15); }
+
+}
+@keyframes pabajo {
+
+    0%   { box-shadow: 0px 5px 20px 3px rgba(64, 50, 255, 0.15); }
+    100% { box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1); }
+
+}
+
+
+@media (max-width: 850px) {
+    .main-container {
+        width: 400px;
+        margin: 50px auto;
+        display: block;
+    }
+
+    .card {
+        margin-bottom: 30px;
+        box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1);
+        animation: pabajo .5s;
+        position: relative;
+        left: -20px;
+    }
+}
