@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Input, Typography, Divider, message, AutoComplete } from 'antd';
 import { useUsuario } from '../../hooks/useUsuario';
 
@@ -11,14 +11,17 @@ export const Login = () => {
     const [ username, setUsername ] = useState( "" );
     const [ password, setPassword ] = useState( "" );
 
-    const { usuario, login } = useUsuario();
+    const { login } = useUsuario();
 
     const login_handler = async () => {
 
         const get_login = await login( username, password ); 
 
-        if ( get_login ) message.success('Inicio de sesión correcto!', 2);
-        else             message.error('Usuario o contraseña incorrectos', 2);
+        if ( get_login ) {
+            message.success('Inicio de sesión correcto!', 2);
+        } else {
+            message.error('Usuario o contraseña incorrectos', 2);
+        }
 
     }
 

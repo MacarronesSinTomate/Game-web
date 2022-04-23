@@ -1,10 +1,7 @@
-import axios from 'axios';
-import React, { useState } from 'react'
 import { apiRequest } from '../utils/apiRequest';
+import { session } from '../utils/session';
 
 export const useUsuario = () => {
-
-    const [ usuario, setUsuario ] = useState( null );
 
     const login = async ( _usuario, _password ) => {
 
@@ -12,14 +9,15 @@ export const useUsuario = () => {
             username: _usuario,
             password: _password
         }
-        const check_login = await apiRequest( "post", "/login", body );
-
-        if ( check_login.error ) return false;
+        const req_login = await apiRequest( "post", "/login", body );
+        if ( !req_login || req_login.error ) return null;
         
-        setUsuario( check_login.usuario );
-        return true;
+        const { usuario, token } = req_login;
 
-    }
+        session.set({ usuario, token });
+        window.location = "/asd";
+
+    }   
     const deleteUser = async () => {
 
         
@@ -32,7 +30,6 @@ export const useUsuario = () => {
     }
 
     return {
-        usuario,
         login,
         deleteUser,
         modifierUser

@@ -6,6 +6,8 @@ import { Spacer } from '../Spacer/Spacer';
 import { createFromIconfontCN } from '@ant-design/icons';
 
 import './NavBar.css';
+import { session } from '../../utils/session';
+import { useNavigate } from 'react-router-dom';
 
 const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -13,15 +15,17 @@ const IconFont = createFromIconfontCN({
 
 export const NavBar = () => {
 
+    const navigate = useNavigate();
+
     // ITEMS DEL DROPDOWN
     const items = [
         {   // CONFIGURACIÓN
-            onClick : () => { console.log( "AJUSTES" ); },
+            onClick : () => { if ( session.get()?.token ) navigate('/login') },
             icon: <SettingTwoTone />,
             key: 1
         },
         {   // CERRAR SESIÓN
-            onClick : () => { console.log( "Cerramos sesion" ); },
+            onClick : () => { session.del(); window.location.reload() },
             icon: <IconFont type="icon-tuichu"/>,
             key: 2
         }
