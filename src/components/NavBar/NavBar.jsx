@@ -54,6 +54,7 @@ export const NavBar = () => {
                     className='nav-btn'
                     style={ styles.button_style }
                     type="primary"
+                    onClick={ () => { navigate("/") } }
                 >
                     Home
                 </Button>

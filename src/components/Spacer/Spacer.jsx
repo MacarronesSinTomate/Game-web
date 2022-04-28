@@ -34,7 +34,7 @@ export const Spacer = ( { orientation, space, backgroundColor } ) => {
 
     return (
 
-        <div style={ get_params() }></div>
+        <div style={ get_params() }> </div>
 
     )
 
