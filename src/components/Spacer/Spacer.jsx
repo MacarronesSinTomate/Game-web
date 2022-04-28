@@ -1,31 +1,35 @@
 import React from 'react'
 
-export const Spacer = ( { orientation, space } ) => {
+export const Spacer = ( { orientation, space, backgroundColor } ) => {
 
     const get_params = () => {
+        
+        const params = {};
+
+        if ( backgroundColor ) {
+            params.backgroundColor = backgroundColor;
+        }
+
         if ( orientation == "horizontal" ) {
 
-            return {
-                marginLeft: space,
-                marginRight: space
-            }
+            params.marginLeft = space;
+            params.marginRight = space;
 
         }
         else if ( orientation == "vertical" ) {
             
-            return {
-                marginTop: space,
-                marginBottom: space
-            }
+            params.marginTop = space;
+            params.marginBottom = space;
 
         }
         else {
             
-            return {
-                margin: space
-            }
+            params.margin = space;
 
         }
+
+        return params;
+
     }
 
     return (

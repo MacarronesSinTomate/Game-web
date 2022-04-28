@@ -15,7 +15,8 @@ export const useUsuario = () => {
         const { usuario, token } = req_login;
 
         session.set({ usuario, token });
-        window.location = "/asd";
+        window.location = "/";
+        return true;
 
     }   
     const deleteUser = async () => {

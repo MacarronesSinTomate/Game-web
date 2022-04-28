@@ -1,52 +1,38 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiRequest } from '../../utils/apiRequest';
 import { session } from '../../utils/session';
 import { NavBar } from '../NavBar/NavBar';
 
 export const RouteAuth = ( { children, auth } ) => {
     
+    const [ authenticated, setAuthenticated] = useState( false );
+
     const navigate = useNavigate();
 
     // ESTE useEffect COMPRUEBA QUE EL TOKEN ES CORRECTO
     useEffect(() => {
 
         // COMPROBAMOS SI HAY SESIÓN INICIADA
-        if ( session.get()?.token ) {
+        if ( auth ) {
 
-            const sessionData = {
-                ...session.get()
+            if ( session.get()?.token ) {
+                setAuthenticated( true );
+            } else {
+                navigate("/");
             }
-            session.set(sessionData);
-        } 
- 
-        // COMPROBAMOS LA VALIDEZ DEL TOKEN DE LA SESIÓN
-        if ( auth ) checkJWT();
 
-    }, [])
-    
-    const checkJWT = async () => {
+        } else {
 
-        try {
-
-            const { token } = session.get();
-            const check_validation_token = await apiRequest( 'get', '/verifyToken', { token }, true );
-
-            // Comprobamos respuesta
-            if ( !check_validation_token.authorization ) navigate( '/login' );
-
-        } catch ( err ) {
-
-            navigate( '/login' );
+            setAuthenticated( true );
 
         }
 
-    }
+    }, [ auth ])
 
     return (
         <>
             <NavBar/>
-            { children }
+            { authenticated && children }
         </>
     );
 

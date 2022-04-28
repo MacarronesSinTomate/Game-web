@@ -1,8 +1,26 @@
 
+.main_container {
+    display: flex;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 340px;
+}
+
+.main_container_mostrar {
+    animation: mostrar 1s;
+    top: 10px;
+}
+.main_container_esconder {
+    animation: esconder 2s;
+    top: -1000px;
+}
+
 .nav-section {
     box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1);
     padding: 10px;
     border-radius: 20px;
+    background-color: white;
 }
 
 .nav-btn {
@@ -25,11 +43,25 @@
     100% { box-shadow: 0px 5px 20px 3px rgba(64, 50, 255, 0.15); }
 
 }
-
 @keyframes pabajo {
 
     0%   { box-shadow: 0px 5px 20px 3px rgba(64, 50, 255, 0.15); }
     100% { box-shadow: 0px 0px 20px 3px rgba(64, 50, 255, 0.1); }
+
+}
+
+@keyframes esconder {
+
+    0%   { top: 10px; }
+    10%  { top: 30px; }
+    100% { top: -1000px; }
+
+}
+@keyframes mostrar {
+
+    0%   { top: -1000px; }
+    50%  { top: 30px; }
+    100% { top: 10px; }
 
 }
 

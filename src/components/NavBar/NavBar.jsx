@@ -1,6 +1,6 @@
-import { UserOutlined, SettingTwoTone } from '@ant-design/icons';
+import { SettingTwoTone, UsbFilled } from '@ant-design/icons';
 import { Button } from 'antd';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dropdown } from '../Dropdown/Dropdown';
 import { Spacer } from '../Spacer/Spacer';
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -17,6 +17,12 @@ export const NavBar = () => {
 
     const navigate = useNavigate();
 
+    const [ anim, setAnim ] = useState("main_container_mostrar");
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+    }, []);
+
     // ITEMS DEL DROPDOWN
     const items = [
         {   // CONFIGURACIÓN
@@ -25,15 +31,22 @@ export const NavBar = () => {
             key: 1
         },
         {   // CERRAR SESIÓN
-            onClick : () => { session.del(); window.location.reload() },
+            onClick : () => { session.del(); navigate("/login") },
             icon: <IconFont type="icon-tuichu"/>,
             key: 2
         }
     ]
 
+    const onScroll = ( e ) => {
+
+        if ( window.scrollY > 100 )  setAnim( "main_container_esconder" );
+        if ( window.scrollY <= 100 ) setAnim( "main_container_mostrar" );
+
+    }
+
     return (
 
-        <div className="main_container" style={ styles.main_container }>
+        <div className={ "main_container " + anim }>
 
             <div className="nav-section">
 
@@ -84,16 +97,6 @@ const styles = {
         color: 'blue',
         backgroundColor: 'rgba( 0, 0, 0, 0)',
 
-    },
-
-    main_container : {
-
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        paddingTop: 10,
-        paddingBottom: 10,
-
-    },
+    }
 
 }
