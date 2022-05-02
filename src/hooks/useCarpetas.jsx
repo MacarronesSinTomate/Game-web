@@ -13,16 +13,10 @@ export const useCarpetas = () => {
         console.log( "Ruta principal: ", rutaPrincipal );
 
         let rutaFinal = "";
-        if ( forceRuta != "" ) {
-
-            if ( rutaPrincipal.length > 0 ) rutaFinal = rutaPrincipal;
-            if ( ruta ) rutaFinal += ruta;
-
-        } else {
-
-            rutaFinal = forceRuta;
-            
-        }
+        if ( forceRuta )          rutaFinal += forceRuta;
+        else if ( rutaPrincipal ) rutaFinal += rutaPrincipal;
+        if ( rutaFinal.length > 0 && rutaFinal.charAt( rutaFinal.length - 1 ) != "/" ) rutaFinal += "/";
+        if ( ruta )               rutaFinal += ruta;
 
         console.log( "RUTA MANDADA: ", rutaFinal );
 
@@ -41,9 +35,19 @@ export const useCarpetas = () => {
 
     const atras = async () => {
 
-        setRutaPrincipal( "" );
+        console.log( "Ruta principal: ", rutaPrincipal );
 
-        await getCarpetas( null, "" );
+        const nuevaRuta = rutaPrincipal.split("/");
+
+        if ( nuevaRuta.length === 0 ) return;
+        
+        nuevaRuta.pop();
+        const nuevaRutaFinal = nuevaRuta.join( "/" );
+
+        console.log( "Nueva ruta: ", nuevaRutaFinal );
+
+        setRutaPrincipal( nuevaRutaFinal );
+        await getCarpetas( null, nuevaRutaFinal );
 
     }
 

@@ -33,7 +33,7 @@ export const Carpetas = ({
 
                         <Button
                             style={ styles.button }
-                            onClick={ () => { getCarpetas( "/" + _carpeta.name ); } }
+                            onClick={ () => { getCarpetas( _carpeta.name ); } }
                             type='primary'
                         >
                             { switchFormat( _carpeta.name ) }  
